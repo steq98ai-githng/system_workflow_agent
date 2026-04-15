@@ -2,7 +2,7 @@
 # DO NOT MODIFY THIS FILE.
 # This file serves as the objective evaluator for AI experiments.
 
-def evaluate():
+def evaluate() -> None:
     pass
 
 if __name__ == "__main__":
