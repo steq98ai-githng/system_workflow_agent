@@ -1,0 +1,8 @@
+{
+    "workbench.experimental.share.enabled": true,
+    "testing.automaticallyOpenPeekViewDuringAutoRun": false,
+    "scm.alwaysShowActions": false,
+    "terminal.integrated.accessibleViewFocusOnCommandExecution": true,
+    "merge-conflict.autoNavigateNextConflict.enabled": true,
+    "python.analysis.autoImportCompletions": true
+}
