@@ -1,3 +1,2 @@
-*.log
+gemini-api.key
 __pycache__/
-*.pyc
