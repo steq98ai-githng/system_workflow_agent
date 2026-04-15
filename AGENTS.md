@@ -11,7 +11,7 @@ This document provides instructions and tips for automated agents working on the
 ## General Coding Conventions
 
 - **Performance Optimization PRs**: Must be prefixed with `⚡` and include `What`, `Why`, and `Measured Improvement` sections in the PR description.
-- **Language**: This project implements "AI Chinese Mode", a System Workflow Agent based on NVIDIA G-Assist Protocol V2 and uses Model Context Protocol (MCP) for tool integration. Follow existing code patterns carefully.
+- **Project Locale**: This project implements "AI Chinese Mode" (Traditional Chinese - Taiwan), a System Workflow Agent based on NVIDIA G-Assist Protocol V2 and uses Model Context Protocol (MCP) for tool integration. Follow existing code patterns carefully.
 
 ## Testing Instructions & Environment Notes
 
