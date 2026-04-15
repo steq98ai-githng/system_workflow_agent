@@ -23,3 +23,7 @@
 * Run `install.bat` on Windows to deploy to `C:\ProgramData\NVIDIA Corporation\nvtopps\rise\plugins\system_workflow_agent`.
 * Ensure `config.json` schema validation is enforced natively or using robust logic in `config/loader.py`.
 * Always clean up pycache and test artifacts before packaging using `package_v4.py`.
+
+## 自動化合併防呆與驗證規則 (Automated Merge & Verification Rules)
+* **強制測試要求**: JULES 在提交任何程式碼變更前，必須先在虛擬機內成功運行指定的測試指令（`pytest tests/`）。
+* **標籤約定**: JULES 在發起 PR 時，必須附上 `automerge` 標籤，以此作為後續 CI 系統判斷是否接管自動合併的信號。
