@@ -1,0 +1,32 @@
+name: "Automerge ANDON Mechanism"
+on:
+  pull_request:
+    types:
+      - labeled
+      - opened
+      - synchronize
+      - reopened
+permissions:
+  pull-requests: write
+  contents: write
+
+jobs:
+  test_and_merge:
+    if: contains(github.event.pull_request.labels.*.name, 'automerge')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Install Dependencies
+        run: pip install -r requirements.txt pytest
+      - name: Run Tests (ANDON Safety Hook)
+        run: pytest tests/
+      - name: Auto-merge
+        if: success()
+        run: gh pr merge --auto --squash "$PR_URL"
+        env:
+          PR_URL: ${{github.event.pull_request.html_url}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
