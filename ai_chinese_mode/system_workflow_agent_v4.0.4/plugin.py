@@ -166,6 +166,14 @@ def run_agentic_workflow(user_query: str):
                 Content(role="user", parts=[Part.from_text(user_query)])
             ]
 
+            mcp_tool_map = {}
+            for client in _mcp_clients.values():
+                try:
+                    mcp_tool_map[client] = [t["name"] for t in client.list_tools()]
+                except Exception as e:
+                    logger.error(f"[MCP] Failed to list tools: {e}")
+                    mcp_tool_map[client] = []
+
             for _ in range(5):
                 resp = _client.models.generate_content(model=cfg["gemini_model"], contents=contents, config=GenerateContentConfig(tools=tools))
                 contents.append(Content(role="model", parts=resp.parts))
@@ -186,8 +194,7 @@ def run_agentic_workflow(user_query: str):
                     else:
                         # MCP Tool Routing
                         res_val = "MCP Link Error."
-                        for client in _mcp_clients.values():
-                            mcp_tools = [t["name"] for t in client.list_tools()]
+                        for client, mcp_tools in mcp_tool_map.items():
                             if fn in mcp_tools:
                                 r = client.call_tool(fn, dict(call.args))
                                 res_val = str(r); break
