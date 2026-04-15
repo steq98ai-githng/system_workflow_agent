@@ -18,7 +18,7 @@ This document provides instructions and tips for automated agents working on the
 - **Windows Dependencies (`gassist_sdk`)**: The `gassist_sdk` library located in `ai_chinese_mode/libs/gassist_sdk` utilizes `ctypes.windll`, which is a Windows-specific dependency.
 - **Linux Testing Setup**:
   - Because automated testing often occurs on Linux environments, direct imports of `gassist_sdk` will fail with an `ImportError: cannot import name 'windll' from 'ctypes'`.
-  - When writing or running tests on Linux, you **must mock `gassist_sdk` and `gassist_sdk.mcp`** before importing module dependencies in tests.
+  - When writing or running tests on Linux, you **must mock `ctypes.windll`** (e.g., by setting `ctypes.windll = MagicMock()` if on Linux) before importing module dependencies in tests.
 
 ## Running Tests
 
