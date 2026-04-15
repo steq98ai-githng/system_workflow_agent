@@ -12,6 +12,10 @@ import sys
 import unittest
 from unittest.mock import MagicMock, patch
 
+# Mock Windows dependencies for Linux testing
+import ctypes
+ctypes.windll = MagicMock()
+
 # 加入專案路徑
 _test_dir = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, _test_dir)
