@@ -197,7 +197,8 @@ def run_agentic_workflow(user_query: str):
                         res_val = "MCP Link Error."
                         for client, mcp_tools in mcp_tool_map.items():
                             if fn in mcp_tools:
-                                r = client.call_tool(fn, dict(call.args))
+                                # Use the original tool name required by the MCP server
+                                r = client.call_tool(mcp_tools[fn], dict(call.args))
                                 res_val = str(r); break
                     
                     results.append(Part.from_function_response(name=fn, response={"result": res_val}))
