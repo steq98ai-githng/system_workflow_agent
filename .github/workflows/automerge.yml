@@ -16,6 +16,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Enforce Immutable Evaluator Constraint
+        run: |
+          git fetch origin ${{ github.base_ref }}
+          if git diff --name-only origin/${{ github.base_ref }} | grep -q "^prepare\.py$"; then
+            echo "Error: Modification of prepare.py is strictly prohibited (Immutable Evaluator Constraint)."
+            exit 1
+          fi
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
