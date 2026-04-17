@@ -320,11 +320,11 @@ class StdioTransport(MCPTransport):
 
         # Security: Prevent credential leakage to child processes
         # Filter out sensitive environment variables from os.environ
-        safe_env = {}
         sensitive_keywords = ["API_KEY", "TOKEN", "SECRET", "PASSWORD", "CREDENTIAL"]
-        for k, v in os.environ.items():
-            if not any(keyword in k.upper() for keyword in sensitive_keywords):
-                safe_env[k] = v
+        safe_env = {
+            k: v for k, v in os.environ.items()
+            if not any(keyword in k.upper() for keyword in sensitive_keywords)
+        }
 
         self._env = {**safe_env, **(env or {})}
         self._process: Optional[subprocess.Popen] = None
